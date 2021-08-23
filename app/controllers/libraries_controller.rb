@@ -2,7 +2,7 @@ class LibrariesController < ApplicationController
   def show
     options = Filtering::Intelligence.filter_assets(params)
     sort_string = Filtering::Intelligence.create_sorting_options(params)
-    @assets = params[:sort].nil? ? Asset.where(options) : Asset.where(options).order(sort_string)
+    @assets = Asset.where(options).order(sort_string)
   end
 
   def index

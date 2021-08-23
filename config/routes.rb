@@ -16,4 +16,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  post '/save-search', to: "libraries#save", as: 'save'
 end

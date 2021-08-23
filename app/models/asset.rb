@@ -12,6 +12,11 @@ class Asset < ApplicationRecord
   validates :uploader, presence: true
 
   def self.search(search)
-    where('lower(title) like ?', "%#{search.downcase}%")
+    p search
+    if search.nil?
+      all
+    else
+      where('lower(title) like ?', "%#{search.downcase}%")
+    end
   end
 end

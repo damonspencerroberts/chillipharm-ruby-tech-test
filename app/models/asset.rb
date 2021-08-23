@@ -11,4 +11,7 @@ class Asset < ApplicationRecord
   validates :library, presence: true
   validates :uploader, presence: true
 
+  def self.search(search)
+    where('lower(title) like ?', "%#{search.downcase}%")
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_23_204203) do
+ActiveRecord::Schema.define(version: 2021_08_23_211657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 2021_08_23_204203) do
   create_table "saved_searches", force: :cascade do |t|
     t.bigint "library_id"
     t.string "name", default: "", null: false
-    t.string "keyword", default: "", null: false
+    t.string "search", default: "", null: false
     t.string "sort", default: "", null: false
     t.string "filter", default: "", null: false
     t.datetime "created_at", null: false

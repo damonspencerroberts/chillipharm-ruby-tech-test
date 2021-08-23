@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   end
 
   post '/save-search', to: "libraries#save", as: 'save'
+  delete '/save-search', to: "libraries#delete_save", as: 'save_delete'
 end

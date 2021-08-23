@@ -16,6 +16,7 @@
     </div>
     <div class="row sub-header product-branding product-branding-asset-listing clearfix">
       <div class="col-xs-12">
+        <%= link_to 'Save', save_path(@args), method: :post %>
         <%= link_to " Library Info", info_library_path(current_library), class: "fancybox action", "data-fancybox-type" => "ajax", style: "float: right; text-decoration:underline;" %>
       </div>
     </div>
@@ -73,6 +74,25 @@
     </div>
   </div>
 </div>
+<h3 style="padding-left: 15px;">Saved Searches</h3>
+<div style="display: flex; align-items: center; flex-wrap: wrap; padding: 15px;">
+  <% @saved_searches.map do |saved| %>
+    <a  style="cursor: pointer;" href="<%= saved.url %>">
+      <div style="padding: 5px; margin-right: 5px; display: flex; flex-direction: column; min-width: 250px; border: 1px solid black; min-height: 100px; box-shadow: 0 2px 2px rgba(0,0,0,.2);">
+        <div style="font-weight: bold; font-size 14px;"><%= saved.name %></div>
+        <div style="font-weight: 300; font-size: 10px; color: gray;"><%= saved.created_at.strftime('%b %e %Y, %l:%M %p') %></div>
+        <div style="display: flex; align-items: center; flex-wrap: wrap; padding: 5px; padding-left: 0;">
+          <% ["search", "sort", "filter"].map do |el| %>
+            <% unless saved[el] == '' %>
+              <div style="margin-right: 2px; padding: 5px; border: 1px solid grey; border-radius: 5px; box-shadow: 0 2px 2px rgba(0,0,0,.2);"><%= saved[el] %></div>
+            <% end %>
+          <% end %>
+        </div>
+        <%= link_to "Delete", save_delete_path({save_id: saved.id, id: params[:id]}), data: { method: :delete } %>
+      </div>
+    </a>
+  <% end %>
+</div>
 <% if @assets.any? %>
   <% if params['display_assets'].eql?('display_assets_as_list') %>
     <%= render 'list_view' %>
@@ -106,3 +126,4 @@
     </div>
   </div>
 <% end %>
+

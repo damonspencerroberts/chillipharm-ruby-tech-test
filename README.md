@@ -1,4 +1,4 @@
-# Chillipharm Basic
+# Chillipharm Basic by Damon Roberts
 
 Welcome to the Chillibean Tech test.
 

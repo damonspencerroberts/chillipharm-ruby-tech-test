@@ -1,10 +1,11 @@
 class LibrariesController < ApplicationController
-  before_action :save_params, only: [:save, :delete_save]
+  before_action :save_params, only: %i[save delete_save]
 
   def show
     options = Filtering::Intelligence.filter_assets(params)
     sort_string = Filtering::Intelligence.create_sorting_options(params)
-    @args = { filter: params[:filter], sort: params[:sort], search: params[:search], id: params[:id], url: request.fullpath }
+    @args = { filter: params[:filter], sort: params[:sort], search: params[:search], id: params[:id],
+              url: request.fullpath }
     @saved_searches = SavedSearch.where(library: params[:id])
     @assets = Asset.search(params[:search]).where(options).order(sort_string)
   end
@@ -32,11 +33,8 @@ class LibrariesController < ApplicationController
     keyword = save_service.create_keyword(save_params)
     options[:name] = keyword
     options[:library] = Library.find(params[:id])
-    saved_search_exists = SavedSearch.find_by(url: options[:url])
-    if saved_search_exists.nil?
-      SavedSearch.create(options)
-      redirect_to "/libraries/#{save_params[:id]}"
-    end
+    SavedSearch.create(options)
+    redirect_to "/libraries/#{save_params[:id]}"
   end
 
   def delete_save

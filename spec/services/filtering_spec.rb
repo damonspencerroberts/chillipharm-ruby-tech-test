@@ -30,10 +30,10 @@ RSpec.describe 'Filtering Service' do
       expect(result).to eq('created_at DESC')
     end
 
-    it 'Returns nil when no sort params' do
+    it 'Returns "created_at DESC" when no sort params' do
       params = {}
       result = Filtering::Intelligence.create_sorting_options(params)
-      expect(result).to eq(nil)
+      expect(result).to eq("created_at DESC")
     end
   end
 end

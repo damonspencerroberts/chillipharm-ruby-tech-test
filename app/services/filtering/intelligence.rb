@@ -14,7 +14,7 @@ module Filtering
     end
 
     def create_sorting_options(params)
-      return nil if params[:sort].nil?
+      return "created_at DESC" if params[:sort].nil?
 
       sort_str = params[:sort]
       sort_by_split = sort_str.rpartition('_')
